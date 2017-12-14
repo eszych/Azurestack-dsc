@@ -2,7 +2,6 @@
 # Create a base plan, an offering and set quotas for IAAS
 ###################################################################################################
 
-clear-host
 write-host "Base Plan and Offering be created - please be patient..."
 
 $name = "baseplan"

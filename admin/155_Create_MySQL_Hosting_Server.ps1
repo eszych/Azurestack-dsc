@@ -2,7 +2,6 @@
 # Create MySQL Hosting Server 
 ###################################################################################################
 
-Clear-Host
 write-host "MySQL Hosting Server for PAAS DB will be created - please be patient..."
 
 $mysql_hostname = 'mysqlpaas'

@@ -2,7 +2,6 @@
 # Create FileServer for AppServices 
 ###################################################################################################
 
-Clear-Host
 write-host "FileServer for App-Services will be created - please be patient..."
 
 $fs_hostname = 'fileserver'
@@ -27,12 +26,14 @@ $FSParameters = @{
 
 if (!(Get-AzureRmResourceGroup -ResourceGroupName $rg_paas -ErrorAction SilentlyContinue))
 {
-    New-AzureRmResourceGroup -Name $rg_paas -Location local 
+    $RG = New-AzureRmResourceGroup -Name $rg_paas -Location local
+} else {
+    $RG = Get-AzureRmResourceGroup -ResourceGroupName $rg_paas -ErrorAction SilentlyContinue
 }
 
 New-AzureRmResourceGroupDeployment `
     -Name "$($fs_hostname)_deployment" `
-    -ResourceGroupName $rg_paas `
+    -ResourceGroupName $RG.ResourceGroupName `
     -TemplateUri $templateuri `
     -TemplateParameterObject $FSParameters `
     -Mode Incremental -Verbose 

@@ -2,7 +2,6 @@
 # Install the PowerShell Tools and login to the Azure Stack Environment
 ###################################################################################################
 
-Clear-Host
 write-host "PowerShell Script for Azure Stack will be installed"
 
 # Disable Windows Update

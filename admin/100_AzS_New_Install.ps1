@@ -168,8 +168,6 @@ IF($AzSMktplcitem -eq "0" ) {
 
     .\125_Azure_Marketplace_Download.ps1
 
-    pause
-
     $AzSMktplcitemDateTime = Get-Date -Format g
     New-ItemProperty -Path $RegPath -Name 'MarketplaceDownload Installed' -Value $AzSMktplcitemDateTime -PropertyType STRING -Force | Out-Null
     New-ItemProperty -Path $RegPath -Name 'MarketplaceDownload' -Value $true -PropertyType DWORD -Force | Out-Null
@@ -237,6 +235,8 @@ IF($SQLServerState -eq "0" ) {
 
     .\150_Create_SQL_Hosting_Server.ps1
 
+    Pause
+
     $SQLServerDateTime = Get-Date -Format g
     New-ItemProperty -Path $RegPath -Name 'SQLServer Installed' -Value $SQLServerDateTime -PropertyType STRING -Force | Out-Null
     New-ItemProperty -Path $RegPath -Name 'SQLServer' -Value $true -PropertyType DWORD -Force | Out-Null
@@ -254,7 +254,6 @@ IF($SQLProviderState -eq "0" ) {
 
 #    .\151_Install_SQL_Resource_Provider.ps1
     
-    clear-host
     write-host "SQL Resource Provider will be installed - please be patient..."
 
     # Code goes here
@@ -276,7 +275,6 @@ IF($SQLHostingSrvState -eq "0" ) {
 
 #    .\152_Register_SQL_Hosting_Server.ps1
 
-    clear-host
     write-host "SQL DB hosting server will be registered for DBAAS - please be patient..."
 
     # Code goes here
@@ -296,8 +294,10 @@ IF($SQLHostingSrvState -eq "0" ) {
 $MySQLServerState = (Get-ItemProperty -Path $RegPath -Name 'MySQLServer').MySQLServer
 IF($MySQLServerState -eq "0" ) {
 
-#    .\155_Create_MySQL_Hosting_Server.ps1
+    .\155_Create_MySQL_Hosting_Server.ps1
  
+    Pause
+
     $MySQLServerDateTime = Get-Date -Format g
     New-ItemProperty -Path $RegPath -Name 'MySQLServer Installed' -Value $MySQLServerDateTime -PropertyType STRING -Force | Out-Null
     New-ItemProperty -Path $RegPath -Name 'MySQLServer' -Value $true -PropertyType DWORD -Force | Out-Null
@@ -315,7 +315,6 @@ IF($MySQLProviderState -eq "0" ) {
 
 #    .\156_Install_MySQL_Resource_Provider.ps1
 
-    Clear-Host
     write-host "MySQL Resource Provider will be installed - please be patient..."
 
     # Code goes here
@@ -337,7 +336,6 @@ IF($MySQLHostingSrvState -eq "0" ) {
 
 #    .\157_Register_MySQL_Hosting_Server.ps1
 
-    clear-host
     write-host "MySQL DB hosting server will be registered for DBAAS - please be patient..."
 
     # Code goes here
@@ -357,12 +355,7 @@ IF($MySQLHostingSrvState -eq "0" ) {
 $FileServerState = (Get-ItemProperty -Path $RegPath -Name 'FileServer').FileServer
 IF($FileServerState -eq "0" ) {
 
-#    .\160_Install_FileServer_for_AppServices.ps1
-
-    clear-host
-    write-host "FileServer for App Services will be installed - please be patient..."
-
-    # Code goes here
+    .\160_Install_FileServer_for_AppServices.ps1
 
     $FileServerDateTime = Get-Date -Format g
     New-ItemProperty -Path $RegPath -Name 'FileServer Installed' -Value $FileServerDateTime -PropertyType STRING -Force | Out-Null
@@ -381,7 +374,6 @@ IF($AppServiceState -eq "0" ) {
 
 #    .\165_Install_AppServices.ps1
 
-    clear-host    
     write-host "App-Services will be installed - follow the instructions on screen!"
 
     # Code goes here

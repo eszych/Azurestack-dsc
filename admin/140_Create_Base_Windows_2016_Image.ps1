@@ -1,7 +1,7 @@
 ###################################################################################################
 # Upload a Windows Server 2016 Image for PAAS Providers -  SQL, MySQL, FileServer, AppService
 ###################################################################################################
-clear-host
+
 write-host "Windows Server 2016 Image and Gallery Item will be created - please be patient..."
 
 $ISOPath = 'D:\AzureStack_Installer\en_windows_server_2016_x64_dvd_9718492.iso'
