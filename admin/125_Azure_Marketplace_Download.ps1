@@ -36,9 +36,7 @@ $AzMarketPlaceIDs = ( `
     "microsoft.antimalware-windows-arm", `
     "microsoft.custom-script-linux-arm", `
     "Microsoft.SQLIaaSExtension", `
-    "microsoft.docker-arm", `
-    "Microsoft.WindowsServer2016Datacenter-ARM-Eval", `
-    "bitnami.mysql" `
+    "microsoft.docker-arm" `
 )
 
 $vhdDestinationArray = @() 

@@ -6,7 +6,7 @@ Clear-Host
 write-host "SQL Hosting Server for PAAS DB will be created - please be patient..."
 
 $sql_hostname = 'sqlpaas'
-$rg_paas = "rp_paas"
+$rg_paas = "rg_paas"
 $rppassword = "Passw0rd"
 $templateuri = 'https://raw.githubusercontent.com/Azure/AzureStack-QuickStart-Templates/master/sql-2014-standalone/azuredeploy.json'
 $vmLocalAdminPass = ConvertTo-SecureString "$rppassword" -AsPlainText -Force 
