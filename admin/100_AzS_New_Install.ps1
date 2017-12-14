@@ -109,10 +109,6 @@ IF(!(Test-Path $RegPath)) {
 $PowerShellInstallstate = (Get-ItemProperty -Path $RegPath -Name 'PowerShell').PowerShell
 IF($PowerShellInstallstate -eq "0" ) {
 
-#    $CMDtoRUN = "-command " + $ScriptDir + "\110_Install_PowerShell_Modules.ps1"
-#    write-host $CMDtoRUN
-#    Start-Process -Filepath "powershell.exe" -ArgumentList $CMDtoRUN -Wait -NoNewWindow
-
     .\110_Install_PowerShell_Modules.ps1
 
     $PSInstallDateTime = Get-Date -Format g
@@ -153,9 +149,7 @@ $Global:TenantID = Get-AzsDirectoryTenantId -AADTenantName $TenantName -Environm
 $AzSRegstate = (Get-ItemProperty -Path $RegPath -Name 'RegisterAzS').RegisterAzS
 IF($AzSRegstate -eq "0" ) {
     
-    $CMDtoRUN = "-command " + $ScriptDir + "\120_Azure_Registration.ps1"
-    write-host $CMDtoRUN
-    Start-Process -Filepath "powershell.exe" -ArgumentList $CMDtoRUN -Wait -NoNewWindow
+    .\120_Azure_Registration.ps1
 
     $AzSRegDateTime = Get-Date -Format g
     New-ItemProperty -Path $RegPath -Name 'RegisterAzS Installed' -Value $AzSRegDateTime -PropertyType STRING -Force | Out-Null
@@ -171,10 +165,6 @@ IF($AzSRegstate -eq "0" ) {
 
 $AzSMktplcitem = (Get-ItemProperty -Path $RegPath -Name 'MarketplaceDownload').MarketplaceDownload
 IF($AzSMktplcitem -eq "0" ) {
-
-#    $CMDtoRUN = "-command " + $ScriptDir + "\125_Azure_Marketplace_Download.ps1"
-#    write-host $CMDtoRUN
-#    Start-Process -Filepath "powershell.exe" -ArgumentList $CMDtoRUN -Wait -NoNewWindow
 
     .\125_Azure_Marketplace_Download.ps1
 
@@ -195,10 +185,8 @@ IF($AzSMktplcitem -eq "0" ) {
 $PlanOfferState = (Get-ItemProperty -Path $RegPath -Name 'BasePlan').BasePlan
 IF($PlanOfferState -eq "0" ) {
     
-    $CMDtoRUN = "-command " + $ScriptDir + "\130_Create_Base_Plan.ps1"
-    write-host $CMDtoRUN
-    Start-Process -Filepath "powershell.exe" -ArgumentList $CMDtoRUN -Wait -NoNewWindow
-
+    .\130_Create_Base_Plan.ps1
+    
     $PlanOfferDateTime = Get-Date -Format g
     New-ItemProperty -Path $RegPath -Name 'BasePlan Installed' -Value $PlanOfferDateTime -PropertyType STRING -Force | Out-Null
     New-ItemProperty -Path $RegPath -Name 'BasePlan' -Value $true -PropertyType DWORD -Force | Out-Null
@@ -213,9 +201,7 @@ IF($PlanOfferState -eq "0" ) {
 $W2K16IMGState = (Get-ItemProperty -Path $RegPath -Name 'W2K16Image').W2K16Image
 IF($W2K16IMGState -eq "0" ) {
 
-    $CMDtoRUN = "-command " + $ScriptDir + "\140_Create_Base_Windows_2016_Image.ps1"
-    write-host $CMDtoRUN
-    Start-Process -Filepath "powershell.exe" -ArgumentList $CMDtoRUN -Wait -NoNewWindow
+    .\140_Create_Base_Windows_2016_Image.ps1
 
     $W2K16IMGDateTime = Get-Date -Format g
     New-ItemProperty -Path $RegPath -Name 'W2K16Image Installed' -Value $W2K16IMGDateTime -PropertyType STRING -Force | Out-Null
@@ -232,9 +218,7 @@ IF($W2K16IMGState -eq "0" ) {
 $UBU1604ImageState = (Get-ItemProperty -Path $RegPath -Name 'UBU1604Image').UBU1604Image
 IF($UBU1604ImageState -eq "0" ) {
 
-    $CMDtoRUN = "-command " + $ScriptDir + "\141_Create_Ubuntu_Linux_16.04.3-LTS_Image.ps1"
-    write-host $CMDtoRUN
-    Start-Process -Filepath "powershell.exe" -ArgumentList $CMDtoRUN -Wait -NoNewWindow
+    .\141_Create_Ubuntu_Linux_16.04.3-LTS_Image.ps1
 
     $UBU1604ImageDateTime = Get-Date -Format g
     New-ItemProperty -Path $RegPath -Name 'UBU1604Image Installed' -Value $UBU1604ImageDateTime -PropertyType STRING -Force | Out-Null
@@ -251,9 +235,7 @@ IF($UBU1604ImageState -eq "0" ) {
 $SQLServerState = (Get-ItemProperty -Path $RegPath -Name 'SQLServer').SQLServer
 IF($SQLServerState -eq "0" ) {
 
-    $CMDtoRUN = "-command " + $ScriptDir + "\150_Create_SQL_Hosting_Server.ps1"
-    write-host $CMDtoRUN
-    Start-Process -Filepath "powershell.exe" -ArgumentList $CMDtoRUN -Wait -NoNewWindow
+    .\150_Create_SQL_Hosting_Server.ps1
 
     $SQLServerDateTime = Get-Date -Format g
     New-ItemProperty -Path $RegPath -Name 'SQLServer Installed' -Value $SQLServerDateTime -PropertyType STRING -Force | Out-Null
@@ -270,9 +252,7 @@ IF($SQLServerState -eq "0" ) {
 $SQLProviderState = (Get-ItemProperty -Path $RegPath -Name 'SQLProvider').SQLProvider
 IF($SQLProviderState -eq "0" ) {
 
-#    $CMDtoRUN = "-command " + $ScriptDir + "\151_Install_SQL_Resource_Provider.ps1"
-#    write-host $CMDtoRUN
-#    Start-Process -Filepath "powershell.exe" -ArgumentList $CMDtoRUN -Wait -NoNewWindow
+#    .\151_Install_SQL_Resource_Provider.ps1
     
     clear-host
     write-host "SQL Resource Provider will be installed - please be patient..."
@@ -294,9 +274,7 @@ IF($SQLProviderState -eq "0" ) {
 $SQLHostingSrvState = (Get-ItemProperty -Path $RegPath -Name 'SQLHostingSrv').SQLHostingSrv
 IF($SQLHostingSrvState -eq "0" ) {
 
-#    $CMDtoRUN = "-command " + $ScriptDir + "\152_Register_SQL_Hosting_Server.ps1"
-#    write-host $CMDtoRUN
-#    Start-Process -Filepath "powershell.exe" -ArgumentList $CMDtoRUN -Wait -NoNewWindow
+#    .\152_Register_SQL_Hosting_Server.ps1
 
     clear-host
     write-host "SQL DB hosting server will be registered for DBAAS - please be patient..."
@@ -318,10 +296,8 @@ IF($SQLHostingSrvState -eq "0" ) {
 $MySQLServerState = (Get-ItemProperty -Path $RegPath -Name 'MySQLServer').MySQLServer
 IF($MySQLServerState -eq "0" ) {
 
-    $CMDtoRUN = "-command " + $ScriptDir + "\155_Create_MySQL_Hosting_Server.ps1"
-    write-host $CMDtoRUN
-    Start-Process -Filepath "powershell.exe" -ArgumentList $CMDtoRUN -Wait -NoNewWindow
-
+#    .\155_Create_MySQL_Hosting_Server.ps1
+ 
     $MySQLServerDateTime = Get-Date -Format g
     New-ItemProperty -Path $RegPath -Name 'MySQLServer Installed' -Value $MySQLServerDateTime -PropertyType STRING -Force | Out-Null
     New-ItemProperty -Path $RegPath -Name 'MySQLServer' -Value $true -PropertyType DWORD -Force | Out-Null
@@ -337,9 +313,7 @@ IF($MySQLServerState -eq "0" ) {
 $MySQLProviderState = (Get-ItemProperty -Path $RegPath -Name 'MySQLProvider').MySQLProvider
 IF($MySQLProviderState -eq "0" ) {
 
-#    $CMDtoRUN = "-command " + $ScriptDir + "\156_Install_MySQL_Resource_Provider.ps1"
-#    write-host $CMDtoRUN
-#    Start-Process -Filepath "powershell.exe" -ArgumentList $CMDtoRUN -Wait -NoNewWindow
+#    .\156_Install_MySQL_Resource_Provider.ps1
 
     Clear-Host
     write-host "MySQL Resource Provider will be installed - please be patient..."
@@ -361,9 +335,7 @@ IF($MySQLProviderState -eq "0" ) {
 $MySQLHostingSrvState = (Get-ItemProperty -Path $RegPath -Name 'MySQLHostingSrv').MySQLHostingSrv
 IF($MySQLHostingSrvState -eq "0" ) {
 
-#    $CMDtoRUN = "-command " + $ScriptDir + "\157_Register_MySQL_Hosting_Server.ps1"
-#    write-host $CMDtoRUN
-#    Start-Process -Filepath "powershell.exe" -ArgumentList $CMDtoRUN -Wait -NoNewWindow
+#    .\157_Register_MySQL_Hosting_Server.ps1
 
     clear-host
     write-host "MySQL DB hosting server will be registered for DBAAS - please be patient..."
@@ -385,9 +357,7 @@ IF($MySQLHostingSrvState -eq "0" ) {
 $FileServerState = (Get-ItemProperty -Path $RegPath -Name 'FileServer').FileServer
 IF($FileServerState -eq "0" ) {
 
-#    $CMDtoRUN = "-command " + $ScriptDir + "\160_Install_FileServer_for_AppServices.ps1"
-#    write-host $CMDtoRUN
-#    Start-Process -Filepath "powershell.exe" -ArgumentList $CMDtoRUN -Wait -NoNewWindow
+#    .\160_Install_FileServer_for_AppServices.ps1
 
     clear-host
     write-host "FileServer for App Services will be installed - please be patient..."
@@ -409,9 +379,7 @@ IF($FileServerState -eq "0" ) {
 $AppServiceState = (Get-ItemProperty -Path $RegPath -Name 'AppService').AppService
 IF($AppServiceState -eq "0" ) {
 
-#    $CMDtoRUN = "-command " + $ScriptDir + "\165_Install_AppServices.ps1"
-#    write-host $CMDtoRUN
-#    Start-Process -Filepath "powershell.exe" -ArgumentList $CMDtoRUN -Wait -NoNewWindow
+#    .\165_Install_AppServices.ps1
 
     clear-host    
     write-host "App-Services will be installed - follow the instructions on screen!"
