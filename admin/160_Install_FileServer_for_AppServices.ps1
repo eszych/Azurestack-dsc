@@ -14,13 +14,12 @@ $vmLocalAdminCreds = New-Object System.Management.Automation.PSCredential ("sqlr
 $FSParameters = @{
     "fileServerVirtualMachineSize" = "Standard_A2"
     "imageReference" = "MicrosoftWindowsServer | WindowsServer | 2016-Datacenter | latest"
-    "dnsNameForPublicIP" = "appServiceFileShare"
     "adminUsername" = "fileshareowner"
-    "adminPassword" = $vmLocalAdminPass
+    "adminPassword" = "$vmLocalAdminPass"
     "fileShareOwner" = "fileshareowner"
-    "fileShareOwnerPassword" = $vmLocalAdminPass
+    "fileShareOwnerPassword" = "$vmLocalAdminPass"
     "fileShareUser" = "fileshareuser"
-    "fileShareUserPassword" = $vmLocalAdminPass
+    "fileShareUserPassword" = "$vmLocalAdminPass"
     "vmExtensionScriptLocation" = "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/appservice-fileserver-standalone"
 }
 

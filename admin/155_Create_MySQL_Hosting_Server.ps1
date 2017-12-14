@@ -31,7 +31,7 @@ if (!(Get-AzureRmResourceGroup -ResourceGroupName $rg_paas -ErrorAction Silently
 
 New-AzureRmResourceGroupDeployment `
     -Name "$($sql_hostname)_deployment" `
-    -ResourceGroupName $RG.Resourcegroupnamerg_paas `
+    -ResourceGroupName $RG.Resourcegroupname `
     -TemplateUri $templateuri `
     -TemplateParameterObject $MySQLParameters `
     -Mode Incremental `

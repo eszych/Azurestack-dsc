@@ -233,7 +233,7 @@ IF($UBU1604ImageState -eq "0" ) {
 $SQLServerState = (Get-ItemProperty -Path $RegPath -Name 'SQLServer').SQLServer
 IF($SQLServerState -eq "0" ) {
 
-    .\150_Create_SQL_Hosting_Server.ps1
+    .\150_Create_SQL_Hosting_Server.1.ps1
 
     Pause
 
