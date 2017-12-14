@@ -1,0 +1,14 @@
+﻿{
+"Domain": "azurestack",
+"VMPassword": "Passw0rd",
+"TenantName": "ejsgmx.onmicrosoft.com",
+"serviceuser": "elmar_szych",
+"cloudadmin": "cloudadmin",
+"AZSTools_Location": "D:\\AzureStack-Tools",
+"AzureRMProfile": "2017-03-09-profile",
+"AzureSTackModuleVersion": "1.2.11",
+"KeyvaultDnsSuffix": "adminvault.local.azurestack.external",
+"ArmEndpoint": "https://adminmanagement.local.azurestack.external",
+"RegistryPath": "HKLM:\\SOFTWARE\\Microsoft\\AzureStack\\InstallScript"
+} 
+ 
