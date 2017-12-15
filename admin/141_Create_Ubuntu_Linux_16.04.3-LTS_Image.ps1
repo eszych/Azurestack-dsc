@@ -4,7 +4,7 @@
 
 write-host "Ubuntu 16.04.3-LTS Image and Gallery Item will be created - please be patient..."
 
-$OSdiskPath = 'D:\AzureStack_Installer\xenial-server-cloudimg-amd64-disk1.vhd'
+$OSdiskPath = $Global:UBUNTUVHD
 if (!(Test-Path $OSdiskPath))
 {
     Write-Warning "$OSdiskPath file does not exist. Please download Ubunut 16.04.3-LTS from Canonical and restart script..."

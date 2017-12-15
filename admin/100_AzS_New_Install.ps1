@@ -52,6 +52,8 @@ $Global:AzsCloudadmin = "$($Admin_Defaults.Domain)\$($Admin_Defaults.Cloudadmin)
 $Global:RegPath = $Admin_Defaults.RegistryPath
 $Global:AzureRmProfile = $Admin_Defaults.AzureRmProfile
 $Global:AzureStackModuleVersion = $Admin_Defaults.AzureStackModuleVersion
+$Global:Win2016ISO = $Admin_Defaults.Win2016ISO
+$Global:UBUNTUVHD = $Admin_Defaults.UBUNTUVHD
 
 # Get Password for AzureStack Service User
 write-host "Get Password for AzureStack Service User"
