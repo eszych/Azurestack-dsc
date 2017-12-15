@@ -72,6 +72,7 @@ if (!$Global:CloudAdminCreds)
 #$GLobal:ServiceAdminCreds = $ServiceAdminCreds
 #$Global:CloudAdminCreds = $CloudAdminCreds
 
+
 # Create a RegKey if the script needs to re-run
 write-host "Create a RegKey if the script needs to re-run"
 
