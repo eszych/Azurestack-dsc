@@ -72,7 +72,6 @@ if (!$Global:CloudAdminCreds)
 #$GLobal:ServiceAdminCreds = $ServiceAdminCreds
 #$Global:CloudAdminCreds = $CloudAdminCreds
 
-
 # Create a RegKey if the script needs to re-run
 write-host "Create a RegKey if the script needs to re-run"
 
@@ -143,6 +142,8 @@ Login-AzureRmAccount -EnvironmentName "AzureStackAdmin" -TenantId $TenantID -Cre
 
 # Get the Active Directory tenantId that is used to deploy Azure Stack
 $Global:TenantID = Get-AzsDirectoryTenantId -AADTenantName $TenantName -EnvironmentName "AzureStackAdmin"
+
+Pause
 
 ###################################################################################################
 # Register Azure Stack with Azure for Marketplace Federation
@@ -237,8 +238,6 @@ IF($SQLServerState -eq "0" ) {
 
     .\150_Create_SQL_Hosting_Server.1.ps1
 
-    Pause
-
     $SQLServerDateTime = Get-Date -Format g
     New-ItemProperty -Path $RegPath -Name 'SQLServer Installed' -Value $SQLServerDateTime -PropertyType STRING -Force | Out-Null
     New-ItemProperty -Path $RegPath -Name 'SQLServer' -Value $true -PropertyType DWORD -Force | Out-Null
@@ -298,8 +297,6 @@ IF($MySQLServerState -eq "0" ) {
 
     .\155_Create_MySQL_Hosting_Server.ps1
  
-    Pause
-
     $MySQLServerDateTime = Get-Date -Format g
     New-ItemProperty -Path $RegPath -Name 'MySQLServer Installed' -Value $MySQLServerDateTime -PropertyType STRING -Force | Out-Null
     New-ItemProperty -Path $RegPath -Name 'MySQLServer' -Value $true -PropertyType DWORD -Force | Out-Null

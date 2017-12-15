@@ -10,7 +10,7 @@ Start-Process "sc" -ArgumentList "config wuauserv start=disabled" -Wait -NoNewWi
 # Set the PS Repo
 Set-PSRepository -Name "PSGallery" -InstallationPolicy Trusted
 
-# Install some Tools
+# Install some Tools "install-gitscm"
 if (!$noutils.IsPresent)
 {
     $Utils = ("install-chrome","install-gitscm","Install-VSCode","Create-AZSportalsshortcuts")
