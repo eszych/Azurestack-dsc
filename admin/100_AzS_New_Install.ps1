@@ -57,7 +57,7 @@ $Global:AzureStackModuleVersion = $Admin_Defaults.AzureStackModuleVersion
 write-host "Get Password for AzureStack Service User"
 if (!$Global:ServiceAdminCreds)
 {
-    $ServiceAdminCreds = Get-Credential -UserName $GLobal:ServiceAdmin -Message "Enter Azure ServiceAdmin Password"
+    $Global:ServiceAdminCreds = Get-Credential -UserName $GLobal:ServiceAdmin -Message "Enter Azure ServiceAdmin Password"
 }
 
 # Get Password for CloudAdmin
@@ -67,26 +67,8 @@ if (!$Global:CloudAdminCreds)
     $Global:CloudAdminCreds =  Get-Credential -UserName $Admin_Defaults.Cloudadmin -Message "Enter Azure CloudAdmin Password"
 }
 
-# Wait for both passwords
-Clear-Host 
-
-# Sign in to your environment
-write-host "Logging into the Azure Active Directory Account"
-try {
-    #Login to your Azure Account to get Subscription ID
-    $AzRMAccount = Login-AzureRmAccount -EnvironmentName "AzureCloud" -Credential $ServiceAdminCreds -ErrorAction Stop
-}
-catch {
-    write-host "could not login Azure Active Directory Account $($Global:ServiceAdmin), maybe wrong pasword ? "
-    Break	
-}
-
-$Global:subscription = $AzRMAccount.Context.Subscription.Id
-$Global:TenantID = $AzRMAccount.Context.Tenant.TenantId
-Select-AzureRmSubscription -SubscriptionId $subscription
-Register-AzureRmResourceProvider -ProviderNamespace Microsoft.AzureStack
-$GLobal:ServiceAdminCreds = $ServiceAdminCreds
-$Global:CloudAdminCreds = $CloudAdminCreds
+#$GLobal:ServiceAdminCreds = $ServiceAdminCreds
+#$Global:CloudAdminCreds = $CloudAdminCreds
 
 # Create a RegKey if the script needs to re-run
 write-host "Create a RegKey if the script needs to re-run"
@@ -118,6 +100,23 @@ IF($PowerShellInstallstate -eq "0" ) {
 } ELSE {
     write-host "PowerShell Script for Azure Stack already installed - skipping..."
 }
+
+
+# Sign in to your environment
+write-host "Logging into the Azure Active Directory Account"
+try {
+    #Login to your Azure Account to get Subscription ID
+    $AzRMAccount = Login-AzureRmAccount -EnvironmentName "AzureCloud" -Credential $Global:ServiceAdminCreds -ErrorAction Stop
+}
+catch {
+    write-host "could not login Azure Active Directory Account $($Global:ServiceAdmin), maybe wrong pasword ? "
+    Break	
+}
+
+$Global:subscription = $AzRMAccount.Context.Subscription.Id
+$Global:TenantID = $AzRMAccount.Context.Tenant.TenantId
+Select-AzureRmSubscription -SubscriptionId $subscription
+Register-AzureRmResourceProvider -ProviderNamespace Microsoft.AzureStack
 
 # Import Modules to connect to AzS 
 write-host "Import Modules to connect to AzS"

@@ -4,6 +4,9 @@
 
 write-host "Base Plan and Offering be created - please be patient..."
 
+# Login AzureStackAdmin environment
+Login-AzureRmAccount -EnvironmentName "AzureStackAdmin" -TenantId $TenantID -Credential $ServiceAdminCreds -ErrorAction Stop
+
 $name = "baseplan"
 $rg_name = "rg_plans_offers"
 $ComputeQuota = New-AzsComputeQuota -Name "$($name)_compute" -Location AzureStackAdmin # -VirtualMachineCount 5000
