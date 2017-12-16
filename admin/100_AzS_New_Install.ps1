@@ -143,6 +143,12 @@ Login-AzureRmAccount -EnvironmentName "AzureStackAdmin" -TenantId $TenantID -Cre
 # Get the Active Directory tenantId that is used to deploy Azure Stack
 $Global:TenantID = Get-AzsDirectoryTenantId -AADTenantName $TenantName -EnvironmentName "AzureStackAdmin"
 
+write-host ######################################################################
+write-host # Azure Stack Initialization finished                                # 
+write-host # You may no run the other scripts by pressind ENTER                 # 
+write-host # or cancel out (CTRL-C) and run them one by one                     # 
+write-host ######################################################################
+
 Pause
 
 ###################################################################################################
