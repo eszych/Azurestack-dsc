@@ -1,5 +1,5 @@
 ﻿###################################################################################################
-# Register the SQL VM as hosting Server in the SQL Resource Provider  
+# Register the My-SQL VM as hosting Server in the My-SQL Resource Provider  
 ###################################################################################################
 
 <#
@@ -15,14 +15,14 @@ SKU MUST BE CREATED AFTERB SQL RP IS CREATED !!! TAKES UP To 1 Hr to appear
 
 #>
 
-$sql_hostname = 'sqlpaas'
+$mysql_hostname = 'mysqlpaas'
 $rppassword = "Passw0rd"
 $rg_paas = "rg_paas"
-$templateuri = 'https://raw.githubusercontent.com/bottkars/AzureStack-QuickStart-Templates/patch-3/101-sqladapter-add-hosting-server/azuredeploy.json'
+$templateuri = 'https://raw.githubusercontent.com/bottkars/AzureStack-QuickStart-Templates/patch-1/101-mysqladapter-add-hosting-server/azuredeploy.json'
+$adminusername = "mysqlrpadmin"
 $vmLocalAdminPass = ConvertTo-SecureString "$rppassword" -AsPlainText -Force 
-$vmLocalAdminCreds = New-Object System.Management.Automation.PSCredential ("sqlrpadmin", $vmLocalAdminPass) 
+$vmLocalAdminCreds = New-Object System.Management.Automation.PSCredential ("mysqlrpadmin", $vmLocalAdminPass) 
 $PfxPass = ConvertTo-SecureString "$rppassword" -AsPlainText -Force 
-
 
 if (!(Get-AzureRmResourceGroup -ResourceGroupName $rg_paas -ErrorAction SilentlyContinue))
 {
@@ -32,12 +32,13 @@ if (!(Get-AzureRmResourceGroup -ResourceGroupName $rg_paas -ErrorAction Silently
 }
 
 New-AzureRmResourceGroupDeployment `
-    -Name "$($RG)_DEPLOY" `
-    -ResourceGroupName $RG `
+    -Name "mysqlhost_server" `
+    -ResourceGroupName $rg_paasRG `
     -TemplateUri $templateuri `
-    -HostingServerName "$($sql_hostname).local.cloudapp.azurestack.external" `
-    -hostingServerSQLLoginName sa `
-    -hostingServerSQLLoginPassword $vmlocaladminpass `
+    -HostingServerName "$($mysql_hostname).local.cloudapp.azurestack.external" `
+    -password "$vmlocaladminpass" `
+    -username "mysqlrpadmin" `
     -Mode Incremental `
     -totalSpaceMB 102400 `
-    -skuName SQL2014 -Verbose `
+    -skuName mysql57 `
+    -Verbose 

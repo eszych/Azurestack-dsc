@@ -1,5 +1,5 @@
 ﻿###################################################################################################
-# Install the SQL Resource Provider in a seperate VM 
+# Install the My-SQL Resource Provider in a seperate VM 
 ###################################################################################################
 
 $domain = "AzureStack"
@@ -13,26 +13,27 @@ $vmLocalAdminCreds = New-Object System.Management.Automation.PSCredential ("sqlr
 $PfxPass = ConvertTo-SecureString "$rppassword" -AsPlainText -Force 
 
 # Point to the directory where the RP installation files will be stored
-$SQL_DIR = 'D:\TEMP\SQLRP'
-Remove-Item $SQL_DIR -Force -Recurse -Confirm:$false -ErrorAction SilentlyContinue
-$Dir = New-Item -ItemType Directory $SQL_DIR -Force
-Push-Location $SQL_DIR
+$MYSQL_DIR = "D:\Temp\MySQL"
+Remove-Item $MYSQL_DIR -Force -Recurse -ErrorAction SilentlyContinue -Confirm:$false
+New-Item -ItemType Directory $MYSQL_DIR -Force
+push-Location $MYSQL_DIR
 
-$Uri = "https://aka.ms/azurestacksqlrp"
-$SQL_RP_URI = (Invoke-WebRequest -UseBasicParsing -MaximumRedirection 0 $Uri -ErrorAction SilentlyContinue).links.href
-Start-BitsTransfer $SQL_RP_URI
-$SQL_RP_FILE = Split-Path -Leaf $SQL_RP_URI
-write-host "Extracting $SQL_RP_FILE to $SQL_DIR"
-Start-Process "./$SQL_RP_FILE" -ArgumentList "-s" -Wait
+$Uri = "https://aka.ms/azurestackmysqlrp"
+$MYSQL_RP_URI = (Invoke-WebRequest -UseBasicParsing -MaximumRedirection 0 $Uri -ErrorAction SilentlyContinue).links.href
+Start-BitsTransfer $MYSQL_RP_URI
+$MYSQL_RP_FILE = Split-Path -Leaf $MYSQL_RP_URI
+Start-Process "./$MYSQL_RP_FILE" -ArgumentList "-s" -Wait
+$Password = $Global:VMPassword
 
 # Change directory to the folder where you extracted the installation files
 # and adjust the endpoints
-.\DeploySQLProvider.ps1 `
-  -AzCredential $Global:ServiceAdminCreds `
+.\DeployMySQLProvider.ps1 `
+  -Azcredential $Global:ServiceAdminCreds `
   -VMLocalCredential $vmLocalAdminCreds `
-  -CloudAdminCredential $Global:cloudAdminCreds `
+  -CloudAdminCredential $GLobal:cloudAdminCreds `
   -PrivilegedEndpoint $privilegedEndpoint `
   -DefaultSSLCertificatePassword $PfxPass `
-  -DependencyFilesLocalPath .\cert
+  -DependencyFilesLocalPath .\cert `
+  -AcceptLicense 
 
 Pop-Location
