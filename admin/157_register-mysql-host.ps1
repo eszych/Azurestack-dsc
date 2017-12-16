@@ -33,10 +33,10 @@ if (!(Get-AzureRmResourceGroup -ResourceGroupName $rg_paas -ErrorAction Silently
 
 New-AzureRmResourceGroupDeployment `
     -Name "mysqlhost_server" `
-    -ResourceGroupName $rg_paasRG `
+    -ResourceGroupName $rg_paas `
     -TemplateUri $templateuri `
     -HostingServerName "$($mysql_hostname).local.cloudapp.azurestack.external" `
-    -password "$vmlocaladminpass" `
+    -password $vmlocaladminpass `
     -username "mysqlrpadmin" `
     -Mode Incremental `
     -totalSpaceMB 102400 `

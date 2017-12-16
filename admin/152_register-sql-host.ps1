@@ -37,7 +37,7 @@ New-AzureRmResourceGroupDeployment `
     -TemplateUri $templateuri `
     -HostingServerName "$($sql_hostname).local.cloudapp.azurestack.external" `
     -hostingServerSQLLoginName "$adminusername" `
-    -hostingServerSQLLoginPassword "$vmlocaladminpass" `
+    -hostingServerSQLLoginPassword $vmlocaladminpass `
     -Mode Incremental `
     -totalSpaceMB 102400 `
     -skuName SQL2014 `
