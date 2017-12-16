@@ -1,6 +1,6 @@
 ﻿{
     "Domain": "azurestack",
-    "VMPassword": "Passw0rd",
+    "VMPassword": "Pa$$w0rd1234",
     "TenantName": "ejsgmx.onmicrosoft.com",
     "serviceuser": "elmar_szych",
     "cloudadmin": "cloudadmin",

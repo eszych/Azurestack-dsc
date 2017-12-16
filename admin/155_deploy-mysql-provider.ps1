@@ -5,7 +5,7 @@
 $domain = "AzureStack"
 $prefix = "AzS"
 $privilegedEndpoint = "$prefix-ERCS01"
-$rppassword = "Passw0rd"
+$rppassword = $Global:VMPassword
 
 # Set the credentials for the Resource Provider VM
 $vmLocalAdminPass = ConvertTo-SecureString "$rppassword" -AsPlainText -Force 

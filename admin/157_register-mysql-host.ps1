@@ -15,11 +15,20 @@ SKU MUST BE CREATED AFTERB SQL RP IS CREATED !!! TAKES UP To 1 Hr to appear
 
 #>
 
+
+write-host "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+write-host "!!! Before this script can run a My-SQL SKU has to be created            !!!"
+write-host "!!! Please login to https://adminportal.local.azurestacl.external        !!!"
+write-host "!!! and create a My-SQL SKU named mysql57 in the My-SQL Adapter Settings !!!"
+write-host "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+
+Pause
+
 $mysql_hostname = 'mysqlpaas'
-$rppassword = "Passw0rd"
+$rppassword = $Global:VMPassword
 $rg_paas = "rg_paas"
 $templateuri = 'https://raw.githubusercontent.com/bottkars/AzureStack-QuickStart-Templates/patch-1/101-mysqladapter-add-hosting-server/azuredeploy.json'
-$adminusername = "mysqlrpadmin"
+$adminusername = "sqlrpadmin"
 $vmLocalAdminPass = ConvertTo-SecureString "$rppassword" -AsPlainText -Force 
 $vmLocalAdminCreds = New-Object System.Management.Automation.PSCredential ("mysqlrpadmin", $vmLocalAdminPass) 
 $PfxPass = ConvertTo-SecureString "$rppassword" -AsPlainText -Force 
@@ -37,7 +46,7 @@ New-AzureRmResourceGroupDeployment `
     -TemplateUri $templateuri `
     -HostingServerName "$($mysql_hostname).local.cloudapp.azurestack.external" `
     -password $vmlocaladminpass `
-    -username "mysqlrpadmin" `
+    -username "sqlrpadmin" `
     -Mode Incremental `
     -totalSpaceMB 102400 `
     -skuName mysql57 `

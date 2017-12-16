@@ -6,7 +6,7 @@ write-host "FileServer for App-Services will be created - please be patient..."
 
 $fs_hostname = 'fileserver'
 $rg_paas = "rg_paas"
-$rppassword = "Passw0rd"
+$rppassword = $Global:VMPassword
 $templateuri = 'https://raw.githubusercontent.com/Azure/AzureStack-QuickStart-Templates/master/appservice-fileserver-standalone/azuredeploy.json'
 $vmLocalAdminPass = ConvertTo-SecureString "$rppassword" -AsPlainText -Force 
 $vmLocalAdminCreds = New-Object System.Management.Automation.PSCredential ("sqlrpadmin", $vmLocalAdminPass) 

@@ -15,8 +15,16 @@ SKU MUST BE CREATED AFTERB SQL RP IS CREATED !!! TAKES UP To 1 Hr to appear
 
 #>
 
+write-host "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+write-host "!!! Before this script can run a SQL SKU has to be created         !!!"
+write-host "!!! Please login to https://adminportal.local.azurestacl.external  !!!"
+write-host "!!! and create a SQL SKU named SQL2014 in the SQL Adapter Settings !!!"
+write-host "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+
+Pause
+
 $sql_hostname = 'sqlpaas'
-$rppassword = "Passw0rd"
+$rppassword = $Global:VMPassword
 $rg_paas = "rg_paas"
 $templateuri = 'https://raw.githubusercontent.com/bottkars/AzureStack-QuickStart-Templates/patch-3/101-sqladapter-add-hosting-server/azuredeploy.json'
 $adminusername = "sa"
@@ -36,8 +44,8 @@ New-AzureRmResourceGroupDeployment `
     -ResourceGroupName $rg_paas `
     -TemplateUri $templateuri `
     -HostingServerName "$($sql_hostname).local.cloudapp.azurestack.external" `
-    -hostingServerSQLLoginName "$adminusername" `
-    -hostingServerSQLLoginPassword $vmlocaladminpass `
+    -hostingServerSQLLoginName $adminusername `
+    -hostingServerSQLLoginPassword $vmLocalAdminPass `
     -Mode Incremental `
     -totalSpaceMB 102400 `
     -skuName SQL2014 `

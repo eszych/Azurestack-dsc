@@ -6,7 +6,7 @@ write-host "MySQL Hosting Server for PAAS DB will be created - please be patient
 
 $mysql_hostname = 'mysqlpaas'
 $rg_paas = "rg_paas"
-$password = "Passw0rd"
+$password = $Global:VMPassword
 $templateuri = 'https://raw.githubusercontent.com/bottkars/AzureStack-QuickStart-Templates/patch-2/mysql-standalone-server-windows/azuredeploy.json'
 $vmLocalAdminPass = ConvertTo-SecureString "$password" -AsPlainText -Force 
 $vmLocalAdminCreds = New-Object System.Management.Automation.PSCredential ("sqlrpadmin", $vmLocalAdminPass) 
