@@ -11,17 +11,11 @@ $templateuri = 'https://raw.githubusercontent.com/Azure/AzureStack-QuickStart-Te
 $vmLocalAdminPass = ConvertTo-SecureString "$rppassword" -AsPlainText -Force 
 $vmLocalAdminCreds = New-Object System.Management.Automation.PSCredential ("sqlrpadmin", $vmLocalAdminPass) 
 
-$FSParameters = @{
-    "fileServerVirtualMachineSize" = "Standard_A2"
-    "imageReference" = "MicrosoftWindowsServer | WindowsServer | 2016-Datacenter | latest"
-    "adminUsername" = "fileshareowner"
-    "adminPassword" = "$vmLocalAdminPass"
-    "fileShareOwner" = "fileshareowner"
-    "fileShareOwnerPassword" = "$vmLocalAdminPass"
-    "fileShareUser" = "fileshareuser"
-    "fileShareUserPassword" = "$vmLocalAdminPass"
-    "vmExtensionScriptLocation" = "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/appservice-fileserver-standalone"
-}
+$FSParameters = @{}
+$FSParameters.Add("fileServerVirtualMachineSize","Standard_A2")
+$FSParameters.Add("adminPassword","$vmLocalAdminPass")
+$FSParameters.Add("fileShareOwnerPassword","$vmLocalAdminPass")
+$FSParameters.Add("fileShareUserPassword","$vmLocalAdminPass")
 
 if (!(Get-AzureRmResourceGroup -ResourceGroupName $rg_paas -ErrorAction SilentlyContinue))
 {
@@ -33,6 +27,6 @@ if (!(Get-AzureRmResourceGroup -ResourceGroupName $rg_paas -ErrorAction Silently
 New-AzureRmResourceGroupDeployment `
     -Name "$($fs_hostname)_deployment" `
     -ResourceGroupName $RG.ResourceGroupName `
-    -TemplateUri $templateuri `
+    -TemplateUri https://raw.githubusercontent.com/Azure/AzureStack-QuickStart-Templates/master/appservice-fileserver-standalone/azuredeploy.json `
     -TemplateParameterObject $FSParameters `
-    -Mode Incremental -Verbose 
+    -Verbose 
