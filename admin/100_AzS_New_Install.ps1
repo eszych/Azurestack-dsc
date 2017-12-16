@@ -236,6 +236,27 @@ IF($UBU1604ImageState -eq "0" ) {
 }
 
 ###################################################################################################
+# Installing SQL Resource Provider 
+###################################################################################################
+
+$SQLProviderState = (Get-ItemProperty -Path $RegPath -Name 'SQLProvider').SQLProvider
+IF($SQLProviderState -eq "0" ) {
+
+
+    
+    write-host "SQL Resource Provider will be installed - please be patient..."
+
+    # Code goes here
+
+    $SQLProviderDateTime = Get-Date -Format g
+    New-ItemProperty -Path $RegPath -Name 'SQLProvider Installed' -Value $SQLProviderDateTime -PropertyType STRING -Force | Out-Null
+    New-ItemProperty -Path $RegPath -Name 'SQLProvider' -Value $true -PropertyType DWORD -Force | Out-Null
+
+} ELSE {
+    write-host "SQL Resource Provider already installed - skipping..."
+}
+
+###################################################################################################
 # Create SQL Hosting Server 
 ###################################################################################################
 
@@ -250,27 +271,6 @@ IF($SQLServerState -eq "0" ) {
 
 } ELSE {
     write-host "SQL Hosting Server for PAAS DB already created - skipping..."
-}
-
-###################################################################################################
-# Installing SQL Resource Provider 
-###################################################################################################
-
-$SQLProviderState = (Get-ItemProperty -Path $RegPath -Name 'SQLProvider').SQLProvider
-IF($SQLProviderState -eq "0" ) {
-
-#    .\151_Install_SQL_Resource_Provider.ps1
-    
-    write-host "SQL Resource Provider will be installed - please be patient..."
-
-    # Code goes here
-
-    $SQLProviderDateTime = Get-Date -Format g
-    New-ItemProperty -Path $RegPath -Name 'SQLProvider Installed' -Value $SQLProviderDateTime -PropertyType STRING -Force | Out-Null
-    New-ItemProperty -Path $RegPath -Name 'SQLProvider' -Value $true -PropertyType DWORD -Force | Out-Null
-
-} ELSE {
-    write-host "SQL Resource Provider already installed - skipping..."
 }
 
 ###################################################################################################
