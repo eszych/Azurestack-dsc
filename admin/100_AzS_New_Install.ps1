@@ -257,51 +257,13 @@ IF($SQLProviderState -eq "0" ) {
 }
 
 ###################################################################################################
-# Create SQL Hosting Server 
-###################################################################################################
-
-$SQLServerState = (Get-ItemProperty -Path $RegPath -Name 'SQLServer').SQLServer
-IF($SQLServerState -eq "0" ) {
-
-    .\151_deploy_SQL_server.ps1
-
-    $SQLServerDateTime = Get-Date -Format g
-    New-ItemProperty -Path $RegPath -Name 'SQLServer Installed' -Value $SQLServerDateTime -PropertyType STRING -Force | Out-Null
-    New-ItemProperty -Path $RegPath -Name 'SQLServer' -Value $true -PropertyType DWORD -Force | Out-Null
-
-} ELSE {
-    write-host "SQL Hosting Server for PAAS DB already created - skipping..."
-}
-
-###################################################################################################
-# Register SQL Server as DBaaS Hosting Server 
-###################################################################################################
-
-$SQLHostingSrvState = (Get-ItemProperty -Path $RegPath -Name 'SQLHostingSrv').SQLHostingSrv
-IF($SQLHostingSrvState -eq "0" ) {
-
-    .\152_register-sql-host.ps1
-
-    write-host "SQL DB hosting server will be registered for DBAAS - please be patient..."
-
-    # Code goes here
-
-    $SQLHostingSrvDateTime = Get-Date -Format g
-    New-ItemProperty -Path $RegPath -Name 'SQLHostingSrv Installed' -Value $SQLHostingSrvDateTime -PropertyType STRING -Force | Out-Null
-    New-ItemProperty -Path $RegPath -Name 'SQLHostingSrv' -Value $true -PropertyType DWORD -Force | Out-Null
-
-} ELSE {
-    write-host "SQL DB hosting server already registered for DBAAS - skipping..."
-}
-
-###################################################################################################
 # Installing MySQL Resource Provider 
 ###################################################################################################
 
 $MySQLProviderState = (Get-ItemProperty -Path $RegPath -Name 'MySQLProvider').MySQLProvider
 IF($MySQLProviderState -eq "0" ) {
 
-    .\155_deploy-mysql-provider.ps1
+    .\151_deploy-mysql-provider.ps1
 
     write-host "MySQL Resource Provider will be installed - please be patient..."
 
@@ -316,13 +278,30 @@ IF($MySQLProviderState -eq "0" ) {
 }
 
 ###################################################################################################
+# Create SQL Hosting Server 
+###################################################################################################
+
+$SQLServerState = (Get-ItemProperty -Path $RegPath -Name 'SQLServer').SQLServer
+IF($SQLServerState -eq "0" ) {
+
+    .\152_deploy_SQL_server.ps1
+
+    $SQLServerDateTime = Get-Date -Format g
+    New-ItemProperty -Path $RegPath -Name 'SQLServer Installed' -Value $SQLServerDateTime -PropertyType STRING -Force | Out-Null
+    New-ItemProperty -Path $RegPath -Name 'SQLServer' -Value $true -PropertyType DWORD -Force | Out-Null
+
+} ELSE {
+    write-host "SQL Hosting Server for PAAS DB already created - skipping..."
+}
+
+###################################################################################################
 # Create MySQL Hosting Server 
 ###################################################################################################
 
 $MySQLServerState = (Get-ItemProperty -Path $RegPath -Name 'MySQLServer').MySQLServer
 IF($MySQLServerState -eq "0" ) {
 
-    .\156_deploy_MySQL_Server.ps1
+    .\153_deploy_MySQL_Server.ps1
  
     $MySQLServerDateTime = Get-Date -Format g
     New-ItemProperty -Path $RegPath -Name 'MySQLServer Installed' -Value $MySQLServerDateTime -PropertyType STRING -Force | Out-Null
@@ -333,13 +312,34 @@ IF($MySQLServerState -eq "0" ) {
 }
 
 ###################################################################################################
+# Register SQL Server as DBaaS Hosting Server 
+###################################################################################################
+
+$SQLHostingSrvState = (Get-ItemProperty -Path $RegPath -Name 'SQLHostingSrv').SQLHostingSrv
+IF($SQLHostingSrvState -eq "0" ) {
+
+    .\154_register-sql-host.ps1
+
+    write-host "SQL DB hosting server will be registered for DBAAS - please be patient..."
+
+    # Code goes here
+
+    $SQLHostingSrvDateTime = Get-Date -Format g
+    New-ItemProperty -Path $RegPath -Name 'SQLHostingSrv Installed' -Value $SQLHostingSrvDateTime -PropertyType STRING -Force | Out-Null
+    New-ItemProperty -Path $RegPath -Name 'SQLHostingSrv' -Value $true -PropertyType DWORD -Force | Out-Null
+
+} ELSE {
+    write-host "SQL DB hosting server already registered for DBAAS - skipping..."
+}
+
+###################################################################################################
 # Register MySQL Server as DBaaS Hosting Server 
 ###################################################################################################
 
 $MySQLHostingSrvState = (Get-ItemProperty -Path $RegPath -Name 'MySQLHostingSrv').MySQLHostingSrv
 IF($MySQLHostingSrvState -eq "0" ) {
 
-    .\157_register-mysql-host.ps1
+    .\155_register-mysql-host.ps1
 
     write-host "MySQL DB hosting server will be registered for DBAAS - please be patient..."
 

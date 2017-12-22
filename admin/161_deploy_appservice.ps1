@@ -46,14 +46,15 @@ Push-Location .\AppServiceHelperScripts
     -CertificateFilePath (join-path (get-location).Path "sso.appservice.local.azurestack.external.pfx") `
     -CertificatePassword $PfxPass
 
+write-host "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
 write-host "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-write-host "!!! This script requires User Intervention                                             !!!"
+write-host "!!! Please copy the GUiD displayed above for the App Service Installation.             !!!"
+write-host "!!!                                                                                    !!!"
+write-host "!!! The installation of App Services requires User Intervention.                       !!!"
 write-host "!!! Please follow the docs under to following link:                                    !!!"
 write-host "!!! https://docs.microsoft.com/en-us/azure/azure-stack/azure-stack-app-service-deploy  !!!"
 write-host "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-
-Pause
-
+    
 pop-location
 $Argumentlist = "/logfile "+$APPSVC_DIR+"\Appservice\appservice.log"
 Start-Process ".\AppService.exe" -ArgumentList $Argumentlist -Wait
