@@ -16,11 +16,12 @@ param (
 )
 
 # Set PS Execution Policy
-Set-ExecutionPolicy  -ExecutionPolicy RemoteSigned -force
+Set-ExecutionPolicy  -ExecutionPolicy unrestricted -Confirm:0 -force
 
 # Determine script location for PowerShell
 $GLOBAL:ScriptDir = Split-Path $script:MyInvocation.MyCommand.Path
 Write-Host "Current script directory is $ScriptDir"
+Set-Location $ScriptDir
 
 $DateTime = Get-Date -Format g
 Write-Host "Script started at $DateTime"
@@ -86,6 +87,16 @@ IF(!(Test-Path $RegPath)) {
 } ELSE {
     New-ItemProperty -Path $RegPath -Name 'Last Install Attempt' -Value "$DateTime" -PropertyType STRING -Force | Out-Null
 }
+
+
+$allps1files = Get-ChildItem $ScriptDir -Filter *.ps1
+
+$allps1files | Foreach-Object {
+    $ps1file = $_.FullName
+    # write-host $ps1file 
+    Unblock-File -Path $ps1file 
+}
+
 
 ###################################################################################################
 # Install the PowerShell Tools and login to the Azure Stack Environment

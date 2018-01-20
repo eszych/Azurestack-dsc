@@ -8,13 +8,27 @@ Import-Module "$($GLobal:AZSTools_location)\Registration\RegisterWithAzure.psm1"
 
 #Login to your Azure Account to get Subscription ID
 $AzRMAccount = Login-AzureRmAccount -EnvironmentName "AzureCloud" -Credential $Global:ServiceAdminCreds -ErrorAction Stop
-Set-AzureRmEnvironment -Name "AzureCloud"
+
+Add-AzureRmAccount -EnvironmentName "AzureCloud" -Credential $Global:ServiceAdminCreds
+
+# register the Azure Stack resource provider in your Azure subscription
+Register-AzureRmResourceProvider -ProviderNamespace Microsoft.AzureStack
 
 $AzureContext = Get-AzureRmContext
 
-Add-AzsRegistration `
+Set-AzsRegistration `
     -CloudAdminCredential $Global:CloudAdminCreds `
-    -AzureSubscriptionId $AzureContext.Subscription.Id `
-    -AzureDirectoryTenantName $AzureContext.Tenant.TenantId `
     -PrivilegedEndpoint AzS-ERCS01 `
-    -BillingModel Development 
+    -BillingModel Development
+
+
+#Set-AzureRmEnvironment -Name "AzureCloud"
+#
+#$AzureContext = Get-AzureRmContext
+#
+#Add-AzsRegistration `
+#    -CloudAdminCredential $Global:CloudAdminCreds `
+#    -AzureSubscriptionId $AzureContext.Subscription.Id `
+#    -AzureDirectoryTenantName $AzureContext.Tenant.TenantId `
+#    -PrivilegedEndpoint AzS-ERCS01 `
+#    -BillingModel Development 

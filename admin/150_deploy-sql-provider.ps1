@@ -13,7 +13,7 @@ $vmLocalAdminCreds = New-Object System.Management.Automation.PSCredential ("sqlr
 $PfxPass = ConvertTo-SecureString "$rppassword" -AsPlainText -Force 
 
 # Point to the directory where the RP installation files will be stored
-$SQL_DIR = 'D:\TEMP\SQLRP'
+$SQL_DIR = 'C:\ClusterStorage\Volume1\SQLRP'
 Remove-Item $SQL_DIR -Force -Recurse -Confirm:$false -ErrorAction SilentlyContinue
 $Dir = New-Item -ItemType Directory $SQL_DIR -Force
 Push-Location $SQL_DIR

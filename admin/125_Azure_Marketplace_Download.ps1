@@ -14,7 +14,7 @@
 write-host "Download Items from the Azure Marketplace "
 
 $Cloud = "AzureCloud"
-$Destination = "D:\AzSMarketplace"
+$Destination = "C:\AzSMarketplace"
 $AzureCredentials = $GLOBAL:ServiceAdminCreds
 
 function Set-String {

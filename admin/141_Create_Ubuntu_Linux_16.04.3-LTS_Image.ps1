@@ -36,8 +36,8 @@ if (!(Get-AzureStorageContainer -name gallery -Context $StorageAccount.Context -
     $GalleryContainer = Get-AzureStorageContainer -name gallery -Context $StorageAccount.Context -ErrorAction SilentlyContinue
 }
 
-Invoke-WebRequest "https://raw.githubusercontent.com/Microsoft/PartsUnlimitedMRP/master/deploy/azurestack/instances/ubuntu_server_1604_base/Canonical.UbuntuServer.1.0.0.azpkg" -OutFile "D:\Canonical.UbuntuServer.1.0.0.azpkg"
+Invoke-WebRequest "https://raw.githubusercontent.com/Microsoft/PartsUnlimitedMRP/master/deploy/azurestack/instances/ubuntu_server_1604_base/Canonical.UbuntuServer.1.0.0.azpkg" -OutFile "C:\ClusterStorage\Volume1\Canonical.UbuntuServer.1.0.0.azpkg"
 
-$GalleryContainer | Set-AzureStorageBlobContent -File "D:\Canonical.UbuntuServer.1.0.0.azpkg" -Verbose
+$GalleryContainer | Set-AzureStorageBlobContent -File "C:\ClusterStorage\Volume1\Canonical.UbuntuServer.1.0.0.azpkg" -Verbose
 $GalleryItemURI = (Get-AzureStorageBlob -Context $StorageAccount.Context -Blob "Canonical.UbuntuServer.1.0.0.azpkg" -Container 'gallery').ICloudBlob.uri.AbsoluteUri
 Add-AzsGalleryItem -GalleryItemUri $GalleryItemURI -Verbose 

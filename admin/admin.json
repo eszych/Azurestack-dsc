@@ -4,12 +4,12 @@
     "TenantName": "ejsgmx.onmicrosoft.com",
     "serviceuser": "elmar_szych",
     "cloudadmin": "cloudadmin",
-    "AZSTools_Location": "D:\\AzureStack-Tools",
+    "AZSTools_Location": "C:\\ClusterStorage\\Volume1\\AzureStack-Tools",
     "AzureRMProfile": "2017-03-09-profile",
     "AzureSTackModuleVersion": "1.2.11",
     "KeyvaultDnsSuffix": "adminvault.local.azurestack.external",
     "ArmEndpoint": "https://adminmanagement.local.azurestack.external",
     "RegistryPath": "HKLM:\\SOFTWARE\\Microsoft\\AzureStack\\InstallScript",
-    "Win2016ISO": "D:\\AzureStack_installer\\Windows_Svr_2016_EN_DC.iso",
-    "UBUNTUVHD": "D:\\AzureStack_installer\\xenial-server-cloudimg-amd64-disk1.vhd" 
+    "Win2016ISO": "C:\\ClusterStorage\\Volume1\\Windows_Server_2016_Eval.iso",
+    "UBUNTUVHD": "C:\\ClusterStorage\\Volume1\\xenial-server-cloudimg-amd64-disk1.vhd" 
 } 

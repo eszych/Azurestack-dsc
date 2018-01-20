@@ -22,7 +22,7 @@ $vmLocalAdminCreds = New-Object System.Management.Automation.PSCredential ("sqlr
 $PfxPass = ConvertTo-SecureString "$rppassword" -AsPlainText -Force 
 
 # Point to the directory where the RP installation files will be stored
-$APPSVC_DIR = 'D:\TEMP\Appservice'
+$APPSVC_DIR = 'C:\ClusterStorage\Volume1\Appservice'
 Remove-Item $APPSVC_DIR -Force -Recurse -Confirm:$false -ErrorAction SilentlyContinue
 $Dir = New-Item -ItemType Directory $APPSVC_DIR -Force
 Push-Location $APPSVC_DIR

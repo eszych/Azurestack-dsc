@@ -13,7 +13,7 @@ $vmLocalAdminCreds = New-Object System.Management.Automation.PSCredential ("sqlr
 $PfxPass = ConvertTo-SecureString "$rppassword" -AsPlainText -Force 
 
 # Point to the directory where the RP installation files will be stored
-$MYSQL_DIR = "D:\Temp\MySQL"
+$MYSQL_DIR = 'C:\ClusterStorage\Volume1\MySQL'
 Remove-Item $MYSQL_DIR -Force -Recurse -ErrorAction SilentlyContinue -Confirm:$false
 New-Item -ItemType Directory $MYSQL_DIR -Force
 push-Location $MYSQL_DIR
